@@ -76,7 +76,3 @@ export class RickMortyApp extends LitElement {
   }
 }
 customElements.define("rick-morty-app", RickMortyApp);
-
-/* 
-  !jacinta cholito pregunta a la beba que va a hacer con los polos de su equipo aparte de usarlos como trapeador 
-*/

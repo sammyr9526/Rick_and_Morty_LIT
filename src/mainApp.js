@@ -2,9 +2,33 @@ import { LitElement, html, css } from "lit";
 import "./views/tasks.js";
 import "./views/home.js";
 import "./views/RickMortyApp.js";
+import "./views/listaHamburguesa.js";
 
 export class MainApp extends LitElement {
   static properties = {
+    view: { type: String },
+  };
+
+  constructor() {
+    super();
+    this.view = "loader";
+  }
+
+  // Esperamos 2 segundos y cambiamos la vista ("montamos" el siguiente componente)
+  firstUpdated() {
+    setTimeout(() => {
+      this.view = "shop";
+    }, 2000); // puedes ajustar el tiempo
+  }
+
+  render() {
+    return this.view === "loader"
+      ? html`<view-home></view-home>`
+      : html`<burguer-list></burguer-list>`;
+  }
+}
+
+/*  static properties = {
     currentView: { type: String },
   };
 
@@ -31,9 +55,6 @@ export class MainApp extends LitElement {
       border-bottom: 2px solid #fff;
       font-weight: bold;
     }
-    section {
-      padding: 2rem;
-    }
   `;
 
   constructor() {
@@ -47,7 +68,20 @@ export class MainApp extends LitElement {
 
   render() {
     return html`
-      <nav>
+      <section>
+        ${this.currentView === "home" ? html`<view-home></view-home>` : ""}
+        ${this.currentView === "rickmorty"
+          ? html`<rick-morty-app></rick-morty-app>`
+          : ""}
+        ${this.currentView === "tasks" ? html`<view-tasks></view-tasks>` : ""}
+      </section>
+    `;
+  }
+} */
+customElements.define("main-app", MainApp);
+
+/* 
+   <nav>
         <button
           @click="${() => this.setView("home")}"
           ?selected=${this.currentView === "home"}
@@ -67,14 +101,4 @@ export class MainApp extends LitElement {
           tasks
         </button>
       </nav>
-      <section>
-        ${this.currentView === "home" ? html`<view-home></view-home>` : ""}
-        ${this.currentView === "rickmorty"
-          ? html`<rick-morty-app></rick-morty-app>`
-          : ""}
-        ${this.currentView === "tasks" ? html`<view-tasks></view-tasks>` : ""}
-      </section>
-    `;
-  }
-}
-customElements.define("main-app", MainApp);
+*/
